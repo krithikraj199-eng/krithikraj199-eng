@@ -171,14 +171,17 @@ A crop-health system focused on disease prediction, intelligent analysis and pra
 
 <<div align="center">
 
+## `> ./activity_stream --visualize`
+
+<div align="center">
+
 <img
-  src="https://github-readme-activity-graph.vercel.app/graph?username=krithikraj199-eng&bg_color=0D1117&color=39FF14&line=8A2BE2&point=FFFFFF&area=true&area_color=39FF14&hide_border=true&radius=12&custom_title=KIRUTHICKRAJ%20%2F%2F%20ACTIVITY%20SIGNAL"
+  src="https://github-readme-activity-graph.vercel.app/graph?username=krithikraj199-eng&theme=github-compact&hide_border=true"
   width="96%"
   alt="KIRUTHICKRAJ GitHub activity graph"
 />
 
 </div>
-
 
 ---
 
