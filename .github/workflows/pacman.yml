@@ -2,8 +2,10 @@ name: Generate Pac-Man Contribution Graph
 
 on:
   schedule:
-    - cron: "15 0 * * *"
+    - cron: "0 0 * * *"
+
   workflow_dispatch:
+
   push:
     branches:
       - main
@@ -14,37 +16,23 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout profile repository
+
+      - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Use Node.js 24
-        uses: actions/setup-node@v4
+      - name: Generate Pac-Man contribution graph
+        uses: abozanona/pacman-contribution-graph@main
         with:
-          node-version: "24"
+          github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          games: pacman
+          player_style: opportunistic
+          hide_month_labels: "false"
 
-      - name: Generate Pac-Man SVGs
-        shell: bash
-        run: |
-          mkdir -p dist
-
-          npx --yes pacman-contribution-graph@5.3.2 \
-            --game pacman \
-            --platform github \
-            --username "${GITHUB_REPOSITORY_OWNER}" \
-            --gameTheme github \
-            --output dist/pacman-contribution-graph.svg
-
-          npx --yes pacman-contribution-graph@5.3.2 \
-            --game pacman \
-            --platform github \
-            --username "${GITHUB_REPOSITORY_OWNER}" \
-            --gameTheme github-dark \
-            --output dist/pacman-contribution-graph-dark.svg
-
-      - name: Publish generated SVGs to output branch
+      - name: Publish Pac-Man SVGs to output branch
         shell: bash
         run: |
           cp -R dist /tmp/pacman-dist
@@ -53,9 +41,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git switch --orphan output-publish
+
           git rm -rf . || true
+
           cp /tmp/pacman-dist/*.svg .
 
-          git add *.svg
+          git add .
+
           git commit -m "chore: update Pac-Man contribution graph"
+
           git push --force origin HEAD:output
