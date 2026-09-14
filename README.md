@@ -165,12 +165,6 @@ A crop-health system focused on disease prediction, intelligent analysis and pra
 </div>
 
 ---
-
-## `> ./activity_stream --visualize`
-
-
-<<div align="center">
-
 ## `> ./activity_stream --visualize`
 
 <div align="center">
@@ -182,6 +176,9 @@ A crop-health system focused on disease prediction, intelligent analysis and pra
 />
 
 </div>
+
+
+
 
 ---
 
